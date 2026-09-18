@@ -54,9 +54,10 @@ examples/
                                         # explain the skill and demo every element
 ```
 
-**Try it in one minute:** open [`examples/showcase.html`](examples/showcase.html) in a
-browser, press *Copy with formatting*, and paste into Telegram (📎 → Article). The pasted
-article explains the skill and lists what to check.
+**Try it in one minute — no install:** open **[uladzemer.github.io/telegram-article-skill](https://uladzemer.github.io/telegram-article-skill/)**,
+press *Copy with formatting*, and paste into Telegram (📎 → Article). The pasted article
+explains the skill and lists what to check. The same page lives in the repo as
+[`examples/showcase.html`](examples/showcase.html).
 
 Writing patterns included: product launch, promo, digest, how-to guide, longread,
 technical writeup with math, and changelog.
