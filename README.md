@@ -1,8 +1,8 @@
 # Telegram Article Skill
 
-An agent skill for writing posts that use Telegram's built-in **Rich Text Editor**
-(paperclip 📎 → "Article", Telegram 12.9+) — the one with headings, tables, lists and
-collapsible blocks.
+An agent skill for writing well-formatted articles in Telegram's built-in
+**Rich Text Editor** (paperclip 📎 → "Article", Telegram 12.9+) — headings, tables, lists,
+quotes, collapsible blocks, images, carousels and LaTeX formulas.
 
 Works with **Claude Code**, **Codex**, and other agents that read `SKILL.md` files.
 
@@ -10,11 +10,16 @@ Works with **Claude Code**, **Codex**, and other agents that read `SKILL.md` fil
 
 ---
 
-## The problem
+## Two problems it solves
 
-The Article editor is WYSIWYG. Paste HTML source into it and you get literal `<h1>` text
-on screen. Every agent that helpfully hands you an HTML file to "paste into Telegram"
-produces exactly that failure.
+**Formatting in Telegram is structural, not visual.** There is no font picker, no font
+size, no text color. You pick an element's *role* — heading level, quote, callout, code,
+highlight — and the client renders it. Agents that promise "a nicer font" are promising
+something that does not exist.
+
+**The editor is WYSIWYG.** Paste HTML source into it and you get literal `<h1>` text on
+screen. Every agent that hands you an HTML file to "paste into Telegram" produces exactly
+that failure.
 
 ## The insight
 
@@ -24,8 +29,13 @@ not its source — and the formatting transfers: headings, lists, bold, links, a
 Telegram documents this nowhere. Published guides state that tables cannot be pasted.
 We verified otherwise on Telegram Desktop (Windows, Premium) on 2026-09-18.
 
-So the skill's deliverable is not "an HTML file". It is **a rendered page with a copy button**
-that writes both `text/html` and `text/plain` to the clipboard.
+So the skill's deliverable is not "an HTML file". It is **a rendered page with a copy
+button** that writes both `text/html` and `text/plain` to the clipboard.
+
+The skill also covers the editorial side — which content shape wants a table versus a
+list, where blocking requirements belong, how to use carousels and captions, and how to
+hand over LaTeX formulas — plus honest limits: what the editor cannot do, and which
+"clickable article" effects require a bot rather than the editor.
 
 ## What's in here
 
@@ -39,8 +49,8 @@ skills/telegram-article/
     └── copy-button.html                # working drop-in template
 ```
 
-`SKILL.md` covers the editorial side too — what belongs in a table versus a list, where
-blocking requirements go, why UI labels must be verified rather than recalled.
+Writing patterns included: product launch, promo, digest, how-to guide, longread,
+technical writeup with math, and changelog.
 
 ## Install
 
@@ -60,9 +70,11 @@ or paste its contents into your instructions file.
 
 Ask in plain language:
 
-> Write a Telegram announcement about the new pricing, with a table of plans
+> Write a Telegram article about the new pricing, with a table of plans
 
-> Сделай пост в телеграм про запуск, в режиме статьи
+> Turn this into a Telegram longread with proper headings and a pull-quote
+
+> Сделай статью в телеграм про запуск — с таблицей и списком шагов
 
 The agent produces an HTML page. Open it in a browser, press **Copy with formatting**,
 then in Telegram: **📎 → Article → Ctrl+V**.
@@ -78,9 +90,17 @@ then in Telegram: **📎 → Article → Ctrl+V**.
 
 ## Not for
 
+**Interactive messages.** Telegram apps where you tap parts of the message and it responds
+— the chess client, for example — are built with **Bot API Rich Messages** (10.3, August
+2026): a bot posts a message with buttons *inside* the text and edits it in place on each
+tap. An article author cannot make those in the editor. What an author *can* do is use
+`t.me/…` and `tg://…` deep links as ordinary hyperlinks — including `?startapp=` to launch
+a Mini App — which reads and behaves like a button. Covered in
+`references/editor-capabilities.md`.
+
 **Bot API** (`parse_mode=HTML`) — programmatic sending, ~11 inline tags, no headings or
 tables. **Telegraph** — no Premium needed and gets Instant View, but only `h3`/`h4`
-headings and no tables. Both are covered briefly in `references/editor-capabilities.md`.
+headings and no tables. Both covered in `references/editor-capabilities.md`.
 
 ## License
 
@@ -92,17 +112,22 @@ MIT — see [LICENSE](LICENSE).
 
 # Telegram Article Skill (рус.)
 
-Навык для агентов, который пишет посты под встроенный **редактор статей Telegram**
-(скрепка 📎 → «Статья», Telegram 12.9+) — тот, где есть заголовки, таблицы, списки
-и сворачиваемые блоки.
+Навык для агентов, который пишет красиво оформленные статьи во встроенном
+**редакторе статей Telegram** (скрепка 📎 → «Статья», Telegram 12.9+) — заголовки,
+таблицы, списки, цитаты, сворачиваемые блоки, картинки, карусели и формулы LaTeX.
 
 Работает с **Claude Code**, **Codex** и другими агентами, читающими файлы `SKILL.md`.
 
-## Проблема
+## Две проблемы, которые он решает
 
-Редактор статей — визуальный. Вставленный в него HTML-код превращается в текст:
-на экране видно `<h1>`. Любой агент, который выдаёт «HTML-файл, вставьте в телеграм»,
-приводит ровно к этому.
+**Оформление в Telegram структурное, а не визуальное.** Там нет выбора шрифта, нет
+размера кегля, нет цвета текста. Вы выбираете *роль* элемента — уровень заголовка,
+цитату, выноску, код, выделение — а как это выглядит, решает клиент. Крупность задаётся
+только уровнем заголовка.
+
+**Редактор визуальный.** Вставленный в него HTML-код превращается в текст: на экране
+видно `<h1>`. Любой агент, который выдаёт «HTML-файл, вставьте в телеграм», приводит
+ровно к этому.
 
 ## Решение
 
@@ -116,6 +141,11 @@ Telegram нигде это не описывает, а опубликованн�
 Поэтому результат работы навыка — не «HTML-файл», а **отрендеренная страница с кнопкой
 копирования**, которая кладёт в буфер сразу два слоя: `text/html` и `text/plain`.
 
+Навык покрывает и редакторскую часть: что уместно таблицей, а что списком; куда ставить
+блокирующие требования; как использовать карусели и подписи к картинкам; как отдавать
+формулы. И честные границы: чего редактор не умеет и какие «кликабельные статьи»
+требуют бота, а не редактора.
+
 ## Состав
 
 ```
@@ -128,8 +158,8 @@ skills/telegram-article/
     └── copy-button.html                # готовый рабочий шаблон
 ```
 
-Навык покрывает и редакторскую часть: что уместно таблицей, а что списком; куда ставить
-блокирующие требования; почему названия кнопок нужно сверять с продуктом, а не вспоминать.
+Структуры в комплекте: запуск продукта, акция, дайджест, инструкция, лонгрид,
+технический разбор с формулами, changelog.
 
 ## Установка
 
@@ -149,7 +179,9 @@ cp -r telegram-article-skill/skills/telegram-article ~/.claude/skills/
 
 Просто попросите словами:
 
-> Сделай пост в телеграм про запуск, в режиме статьи
+> Сделай статью в телеграм про запуск — с таблицей и списком шагов
+
+> Переделай этот текст в лонгрид для канала, с заголовками и выноской
 
 Агент выдаст HTML-страницу. Откройте её в браузере, нажмите **«Скопировать с оформлением»**,
 затем в Telegram: **📎 → «Статья» → Ctrl+V**.
@@ -164,6 +196,14 @@ cp -r telegram-article-skill/skills/telegram-article ~/.claude/skills/
   в остальных случаях шаблон переключается на `execCommand`.
 
 ## Не для этого
+
+**Интерактивные сообщения.** Приложения в Telegram, где нажимаешь на части сообщения и
+оно отвечает (например, шахматы), сделаны на **Bot API Rich Messages** (10.3, август
+2026): бот публикует сообщение с кнопками *внутри* текста и на каждое нажатие
+перередактирует его на месте. Автор статьи такого в редакторе не сделает. Что автору
+доступно — ссылки `t.me/…` и `tg://…` как обычные гиперссылки, включая `?startapp=` для
+запуска Mini App: выглядит и работает как кнопка. Разобрано в
+`references/editor-capabilities.md`.
 
 **Bot API** (`parse_mode=HTML`) — программная отправка, около 11 строчных тегов,
 без заголовков и таблиц. **Telegraph** — Premium не нужен и даётся Instant View,
