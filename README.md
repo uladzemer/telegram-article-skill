@@ -6,13 +6,14 @@
 </p>
 
 <p align="center">
-  <img src="examples/screenshots/article-en.png" width="46%" alt="The showcase article pasted into Telegram, in English">
-  <img src="examples/screenshots/article-ru.png" width="46%" alt="The same article in Russian">
+  <a href="https://github.com/uladzemer/telegram-article-skill/blob/main/examples/screenshots/article-en.png">
+    <img src="examples/screenshots/article-en.png" width="340" alt="The showcase article pasted into Telegram's Article editor">
+  </a>
 </p>
 
 <p align="center">
   <i>Written by an agent as a web page, copied once, pasted into Telegram's Article editor.<br>
-  Headings, tables, lists, quotes and code blocks all survive the paste.</i>
+  Headings, tables, lists, quotes and code blocks all survive the paste — click to enlarge.</i>
 </p>
 
 An agent skill for writing well-formatted articles in Telegram's built-in
