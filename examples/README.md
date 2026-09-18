@@ -46,9 +46,13 @@ Re-run them when testing an unfamiliar client:
 
 **Still untested:** mobile clients and web.telegram.org.
 
-Separately worth testing by hand in the editor, since no paste can carry them: whether a
-**checklist** created with the editor's own list style is tickable by a *reader*, and how
-images, carousels and formulas behave.
+**Checklists — answered.** Tested across two accounts on 18 September 2026: a checklist
+inside an article is **author-only**. The author can tick boxes, the recipient cannot click
+them. For reader-interactive checkboxes, send a native Telegram checklist as its own message.
+See `checklist-test.html` for the procedure.
+
+Still worth testing by hand in the editor, since no paste can carry them: how images,
+carousels and formulas behave.
 
 ## Screenshots
 

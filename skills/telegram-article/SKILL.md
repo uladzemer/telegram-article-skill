@@ -43,7 +43,7 @@ before committing a long text, and mention the ▦ button as the fallback for ta
 | Collapsible block | Long caveats, spoilers, secondary detail behind a heading |
 | Footer / footnote | Sources, disclaimers, small print at the end |
 | Bulleted / numbered list | Facts / ordered steps |
-| Checklist | Requirements to tick off |
+| Checklist | Requirements to tick off — **author-only**, readers cannot click |
 | Table | Comparable rows — 3+ rows to earn its place |
 | Divider | Hard break between topics |
 | Images, video, audio, files, location | Media between paragraphs |
@@ -138,6 +138,7 @@ In the deliverable itself:
 | Reproduce UI paths from an old draft | Labels drift. Verify against the product. |
 | Bury platform requirements at the bottom | Readers fail silently and churn. |
 | Put an image of a formula | The editor renders LaTeX natively |
+| Promise readers can tick a checklist | Verified author-only; send a native checklist instead |
 | Write one long block of prose | Unreadable on a phone, where it will be read |
 | Target Bot API `parse_mode` | Different product: inline tags only |
 
