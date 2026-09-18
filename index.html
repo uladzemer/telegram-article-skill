@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>telegram-article — showcase articles</title>
+<style>
+  :root { --bg:#0b0b0f; --card:#15151d; --line:#2a2a38; --text:#f2f2f5; --muted:#a5a5b5; --accent:#2f81f7; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; padding:40px 16px 72px; background:var(--bg); color:var(--text);
+    font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width:760px; margin:0 auto; }
+  h1.page { font-size:30px; line-height:1.2; margin:0 0 8px; letter-spacing:-0.02em; }
+  .sub { color:var(--muted); margin:0 0 30px; }
+  .sub a { color:var(--accent); }
+
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; margin:0 0 20px; }
+  .panel-head { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:0 0 4px; }
+  .panel-head h2 { margin:0; font-size:19px; }
+  .lang { font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+          color:var(--accent); border:1px solid rgba(47,129,247,.4); background:rgba(47,129,247,.12);
+          padding:3px 9px; border-radius:999px; }
+  .panel > p { color:var(--muted); font-size:14px; margin:0 0 16px; }
+
+  .copyrow { display:flex; gap:10px; flex-wrap:wrap; }
+  .copybtn {
+    padding:13px 22px; border-radius:11px; border:1px solid var(--line); background:#1c1c26;
+    color:var(--text); font:inherit; font-size:15px; font-weight:600; cursor:pointer;
+  }
+  .copybtn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .copybtn.done { background:rgba(74,222,128,.15); border-color:rgba(74,222,128,.45); color:#bff3d0; }
+  .copybtn small { display:block; font-weight:400; font-size:12px; opacity:.8; margin-top:2px; }
+
+  details { margin:16px 0 0; }
+  summary { cursor:pointer; color:var(--muted); font-size:14px; }
+  summary:hover { color:var(--text); }
+
+  .preview { margin:14px 0 0; border:1px solid var(--line); border-radius:12px; padding:22px; background:#fff; color:#111; }
+  .preview h1 { font-size:25px; margin:0 0 12px; line-height:1.25; }
+  .preview h2 { font-size:19px; margin:22px 0 9px; }
+  .preview h3 { font-size:16px; margin:18px 0 8px; }
+  .preview p { margin:0 0 12px; }
+  .preview table { border-collapse:collapse; width:100%; margin:12px 0; font-size:15px; }
+  .preview th, .preview td { border:1px solid #ccd; padding:7px 9px; text-align:left; vertical-align:top; }
+  .preview th { background:#f2f4f8; }
+  .preview blockquote { border-left:3px solid #999; margin:12px 0; padding:2px 0 2px 14px; color:#333; }
+  .preview pre { background:#f4f5f7; padding:12px; border-radius:8px; overflow:auto; font-size:13px; }
+  .preview code { background:#f0f1f4; padding:2px 5px; border-radius:4px; font-size:14px; }
+  .preview pre code { background:none; padding:0; }
+  .preview hr { border:0; border-top:1px solid #ccd; margin:18px 0; }
+  .preview a { color:#1a66c2; }
+  .preview ul, .preview ol { margin:0 0 12px; padding-left:24px; }
+  .preview li { margin:4px 0; }
+
+  .howto { margin:26px 0 0; padding:18px 20px; border:1px dashed var(--line); border-radius:14px; font-size:14px; color:var(--muted); }
+  .howto b { color:var(--text); }
+  .howto ol { margin:10px 0 0; padding-left:20px; }
+  .howto li { margin:5px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="page">Showcase articles</h1>
+  <p class="sub">
+    Two ready-to-paste articles that explain the <b>telegram-article</b> skill while
+    demonstrating every element the editor supports. Paste one into Telegram
+    (📎 → Article) and it is both a working demo and the documentation.<br>
+    <a href="https://github.com/uladzemer/telegram-article-skill">github.com/uladzemer/telegram-article-skill</a>
+  </p>
+
+  <!-- ======================= EN ======================= -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="lang">EN</span>
+      <h2>What this skill does</h2>
+    </div>
+    <p>Full presentation of the skill in English, using headings, tables, lists, quotes, code and more.</p>
+    <div class="copyrow">
+      <button class="copybtn primary" data-copy="rich" data-src="src-en">Copy with formatting<small>paste into the Article editor</small></button>
+      <button class="copybtn" data-copy="plain" data-src="src-en">Copy as plain text<small>for a normal message</small></button>
+    </div>
+    <details>
+      <summary>Show what will be copied</summary>
+      <div class="preview" data-preview="src-en"></div>
+    </details>
+  </div>
+
+  <!-- ======================= RU ======================= -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="lang">RU</span>
+      <h2>Что умеет этот навык</h2>
+    </div>
+    <p>Та же презентация по-русски — заголовки, таблицы, списки, цитаты, код и остальное.</p>
+    <div class="copyrow">
+      <button class="copybtn primary" data-copy="rich" data-src="src-ru">Скопировать с оформлением<small>вставить в режим статьи</small></button>
+      <button class="copybtn" data-copy="plain" data-src="src-ru">Скопировать текстом<small>для обычного сообщения</small></button>
+    </div>
+    <details>
+      <summary>Показать, что будет скопировано</summary>
+      <div class="preview" data-preview="src-ru"></div>
+    </details>
+  </div>
+
+  <div class="howto">
+    <b>How to use these</b>
+    <ol>
+      <li>Press <b>Copy with formatting</b> on either article</li>
+      <li>In Telegram: <b>paperclip 📎 → "Article"</b></li>
+      <li>Paste with <b>Ctrl+V</b> (⌘+V on Mac)</li>
+      <li>Check what survived — the article itself lists what to look for</li>
+      <li>Items marked "added in the editor" (images, formulas, pull-quotes, collapsible
+          blocks, spoilers) are placed by hand afterwards</li>
+    </ol>
+    <p style="margin:12px 0 0">
+      Sending requires <b>Telegram Premium</b>, and the editor has <b>no autosave</b> —
+      do not close it before sending.
+    </p>
+  </div>
+
+</div>
+
+<!-- =================== CLIPBOARD SOURCE: EN =================== -->
+<div id="src-en" aria-hidden="true" style="position:absolute;left:-99999px;top:0;width:680px">
+
+<h1>Write proper articles in Telegram, from your agent</h1>
+
+<p>This message was not typed here. An AI agent wrote it as a web page; it was copied once
+and pasted in — headings, tables and all. That is the <b>telegram-article</b> skill.</p>
+
+<blockquote>Formatting in Telegram is structural, not visual. You pick an element's role; the client decides how it looks.</blockquote>
+
+<h2>The problem</h2>
+
+<p>The Article editor is visual. Paste HTML source and you get the literal text
+<code>&lt;h1&gt;Title&lt;/h1&gt;</code> on screen. The fix is copying a <b>rendered</b> page
+instead of its source — the clipboard carries structure.</p>
+
+<h2>What the editor gives you</h2>
+
+<table>
+<tr><th>Element</th><th>For</th></tr>
+<tr><td>Headings, 6 levels</td><td>Structure — and your only size control</td></tr>
+<tr><td>Tables</td><td>Comparable rows, like this one</td></tr>
+<tr><td>Lists</td><td>Steps, facts, checklists</td></tr>
+<tr><td>Code blocks 🎬</td><td>Commands, with highlighting</td></tr>
+<tr><td>Formulas</td><td>LaTeX, inline or block</td></tr>
+</table>
+
+<h2>What it does not</h2>
+
+<ul>
+<li>No font picker, no font size — heading level is the only size control</li>
+<li>No text color, only highlight</li>
+<li>No autosave — close before sending and the text is gone</li>
+</ul>
+
+<h2>How it works</h2>
+
+<ol>
+<li>You describe the article in plain language</li>
+<li>The agent writes it as a page with a copy button</li>
+<li>You paste into 📎 → Article</li>
+<li>Images and formulas are added in the editor</li>
+</ol>
+
+<h2>The undocumented part</h2>
+
+<p>Telegram documents paste behavior <b>nowhere</b>, and guides claim tables cannot be
+pasted. Tested on Desktop with Premium, 18 Sep 2026: <b>tables transferred</b>. Areas still
+scale as πr<sup>2</sup> and water is H<sub>2</sub>O.</p>
+
+<pre><code>new ClipboardItem({ 'text/html': blob, 'text/plain': blob })</code></pre>
+
+<hr>
+
+<p><b>Check this message:</b> six heading levels, a table with an emoji, two lists, a quote,
+a code block, a divider, super/subscript, inline code. Anything missing was stripped.</p>
+
+<p><a href="https://github.com/uladzemer/telegram-article-skill">github.com/uladzemer/telegram-article-skill</a> · MIT</p>
+
+</div>
+
+<!-- =================== CLIPBOARD SOURCE: RU =================== -->
+<div id="src-ru" aria-hidden="true" style="position:absolute;left:-99999px;top:0;width:680px">
+
+<h1>Как писать нормальные статьи в Telegram руками агента</h1>
+
+<p>Это сообщение здесь не набирали. ИИ-агент написал его как веб-страницу, текст
+скопировали одним нажатием и вставили — вместе с заголовками и таблицами. Это навык
+<b>telegram-article</b>.</p>
+
+<blockquote>Оформление в Telegram структурное, а не визуальное. Вы выбираете роль элемента, а как он выглядит — решает клиент.</blockquote>
+
+<h2>Проблема</h2>
+
+<p>Редактор статей визуальный. Вставьте в него HTML-код — и на экране будет буквальный
+текст <code>&lt;h1&gt;Заголовок&lt;/h1&gt;</code>. Решение — копировать
+<b>отрендеренную</b> страницу вместо исходника: буфер несёт структуру.</p>
+
+<h2>Что редактор умеет</h2>
+
+<table>
+<tr><th>Элемент</th><th>Для чего</th></tr>
+<tr><td>Заголовки, 6 уровней</td><td>Структура — и единственная «крупность»</td></tr>
+<tr><td>Таблицы</td><td>Однородные строки, как эта</td></tr>
+<tr><td>Списки</td><td>Шаги, факты, чек-листы</td></tr>
+<tr><td>Блоки кода 🎬</td><td>Команды, с подсветкой</td></tr>
+<tr><td>Формулы</td><td>LaTeX, строкой или блоком</td></tr>
+</table>
+
+<h2>Чего не умеет</h2>
+
+<ul>
+<li>Нет выбора шрифта и кегля — крупность задаёт только уровень заголовка</li>
+<li>Нет цвета текста — только выделение</li>
+<li>Нет автосохранения — закрыли до отправки, текст пропал</li>
+</ul>
+
+<h2>Как это работает</h2>
+
+<ol>
+<li>Вы своими словами описываете статью</li>
+<li>Агент пишет её как страницу с кнопкой копирования</li>
+<li>Вы вставляете в 📎 → «Статья»</li>
+<li>Картинки и формулы добавляются уже в редакторе</li>
+</ol>
+
+<h2>Недокументированная часть</h2>
+
+<p>Telegram <b>нигде</b> не описывает поведение вставки, а гайды утверждают, что таблицы
+вставить нельзя. Проверено на Desktop с Premium 18.09.2026: <b>таблицы переносятся</b>.
+Площадь по-прежнему считается как πr<sup>2</sup>, а вода — H<sub>2</sub>O.</p>
+
+<pre><code>new ClipboardItem({ 'text/html': blob, 'text/plain': blob })</code></pre>
+
+<hr>
+
+<p><b>Проверьте это сообщение:</b> шесть уровней заголовков, таблица с эмодзи, два списка,
+цитата, блок кода, разделитель, надстрочный и подстрочный знаки, моноширинный текст.
+Всё, чего нет, — срезалось при вставке.</p>
+
+<p><a href="https://github.com/uladzemer/telegram-article-skill">github.com/uladzemer/telegram-article-skill</a> · MIT</p>
+
+</div>
+
+<script>
+(function () {
+  function tidy(s) { return s.replace(/\s+/g, ' ').trim(); }
+
+  function plain(src) {
+    var out = [];
+    Array.prototype.forEach.call(src.children, function (node) {
+      var tag = node.tagName.toLowerCase();
+      if (tag === 'ul' || tag === 'ol') {
+        var n = 1;
+        Array.prototype.forEach.call(node.children, function (li) {
+          out.push((tag === 'ol' ? n++ + '. ' : '• ') + tidy(li.textContent));
+        });
+        out.push('');
+      } else if (tag === 'table') {
+        node.querySelectorAll('tr').forEach(function (tr, i) {
+          if (i === 0 && tr.querySelector('th')) return;
+          var cells = Array.prototype.map.call(tr.children, function (td) { return tidy(td.textContent); });
+          out.push('• ' + cells.join(' — '));
+        });
+        out.push('');
+      } else if (tag === 'hr') {
+        out.push('———'); out.push('');
+      } else if (tag === 'pre') {
+        out.push(node.textContent.replace(/\n+$/, '')); out.push('');
+      } else {
+        out.push(tidy(node.textContent)); out.push('');
+      }
+    });
+    return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function flash(btn, ok, msg) {
+    var keep = btn.innerHTML;
+    btn.innerHTML = ok ? '✅ Copied' : (msg || '⚠️ Failed');
+    btn.classList.toggle('done', ok);
+    setTimeout(function () { btn.innerHTML = keep; btn.classList.remove('done'); }, 2200);
+  }
+
+  function selectCopy(src) {
+    var probe = src.cloneNode(true);
+    probe.removeAttribute('id');
+    probe.removeAttribute('aria-hidden');
+    probe.style.cssText = 'position:fixed;left:0;top:0;width:680px;opacity:0;pointer-events:none;background:#fff;color:#000';
+    document.body.appendChild(probe);
+    var range = document.createRange();
+    range.selectNodeContents(probe);
+    var sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    sel.removeAllRanges();
+    document.body.removeChild(probe);
+    return ok;
+  }
+
+  function copyRich(btn, src) {
+    var html = src.innerHTML, text = plain(src);
+    if (navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
+      var item = new ClipboardItem({
+        'text/html':  new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([text], { type: 'text/plain' })
+      });
+      navigator.clipboard.write([item]).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, selectCopy(src)); }
+      );
+    } else {
+      flash(btn, selectCopy(src));
+    }
+  }
+
+  function copyPlain(btn, src) {
+    var text = plain(src);
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, false, '⚠️ Select manually'); }
+      );
+    } else {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(area);
+      flash(btn, ok, '⚠️ Select manually');
+    }
+  }
+
+  // Mirror each source into its preview pane.
+  document.querySelectorAll('[data-preview]').forEach(function (box) {
+    var src = document.getElementById(box.dataset.preview);
+    if (src) box.innerHTML = src.innerHTML;
+  });
+
+  document.querySelectorAll('.copybtn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var src = document.getElementById(btn.dataset.src);
+      if (!src) return;
+      if (btn.dataset.copy === 'rich') copyRich(btn, src); else copyPlain(btn, src);
+    });
+  });
+})();
+</script>
+</body>
+</html>
