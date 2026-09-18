@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Объявление о навыке — для Telegram</title>
+<style>
+  :root { --bg:#0b0b0f; --card:#15151d; --line:#2a2a38; --text:#f2f2f5; --muted:#a5a5b5; --accent:#2f81f7; --warn:#ffcc66; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; padding:40px 16px 72px; background:var(--bg); color:var(--text);
+    font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width:720px; margin:0 auto; }
+  h1.page { font-size:28px; line-height:1.2; margin:0 0 8px; letter-spacing:-0.02em; }
+  .sub { color:var(--muted); margin:0 0 26px; }
+
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; margin:0 0 18px; }
+  .panel h2 { margin:0 0 6px; font-size:18px; }
+  .panel > p { color:var(--muted); font-size:14px; margin:0 0 16px; }
+
+  .copyrow { display:flex; gap:10px; flex-wrap:wrap; }
+  .copybtn {
+    padding:13px 22px; border-radius:11px; border:1px solid var(--line); background:#1c1c26;
+    color:var(--text); font:inherit; font-size:15px; font-weight:600; cursor:pointer;
+  }
+  .copybtn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .copybtn.done { background:rgba(74,222,128,.15); border-color:rgba(74,222,128,.45); color:#bff3d0; }
+  .copybtn small { display:block; font-weight:400; font-size:12px; opacity:.8; margin-top:2px; }
+
+  .media { padding:16px 18px; border-radius:14px; margin:0 0 18px;
+           background:rgba(255,204,102,.08); border:1px solid rgba(255,204,102,.3); font-size:15px; }
+  .media b { color:var(--warn); }
+  .media ol { margin:10px 0 0; padding-left:20px; }
+  .media li { margin:6px 0; }
+  .spot { background:rgba(47,129,247,.14); border:1px solid rgba(47,129,247,.35);
+          border-radius:6px; padding:1px 7px; font-size:14px; }
+
+  .preview { margin:14px 0 0; border:1px solid var(--line); border-radius:12px; padding:22px; background:#fff; color:#111; }
+  .preview h1 { font-size:24px; margin:0 0 12px; line-height:1.25; }
+  .preview h2 { font-size:18px; margin:20px 0 9px; }
+  .preview p { margin:0 0 11px; }
+  .preview table { border-collapse:collapse; width:100%; margin:12px 0; font-size:15px; }
+  .preview th, .preview td { border:1px solid #ccd; padding:7px 9px; text-align:left; vertical-align:top; }
+  .preview th { background:#f2f4f8; }
+  .preview blockquote { border-left:3px solid #999; margin:12px 0; padding:2px 0 2px 14px; color:#333; }
+  .preview code { background:#f0f1f4; padding:2px 5px; border-radius:4px; font-size:14px; }
+  .preview hr { border:0; border-top:1px solid #ccd; margin:18px 0; }
+  .preview a { color:#1a66c2; }
+  .preview ul, .preview ol { margin:0 0 11px; padding-left:24px; }
+  .preview li { margin:4px 0; }
+  .preview .slot { background:#fff6da; border:1px dashed #d9b551; padding:8px 12px; border-radius:8px; color:#6b5418; }
+  details { margin:14px 0 0; }
+  summary { cursor:pointer; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="page">Объявление о навыке</h1>
+  <p class="sub">
+    Пост для канала: вы сделали навык, который пишет форматированные статьи для Telegram.
+    Сам пост свёрстан этим же навыком — то есть служит доказательством.
+  </p>
+
+  <div class="panel">
+    <h2>Скопировать текст</h2>
+    <p>Вставляется в режим статьи вместе с заголовками, таблицей, списками и цитатой.</p>
+    <div class="copyrow">
+      <button class="copybtn primary" data-copy="rich">Скопировать с оформлением<small>📎 → «Статья» → Ctrl+V</small></button>
+      <button class="copybtn" data-copy="plain">Скопировать текстом<small>для обычного сообщения</small></button>
+    </div>
+    <details open>
+      <summary>Показать, что будет скопировано</summary>
+      <div class="preview" id="preview"></div>
+    </details>
+  </div>
+
+  <div class="media">
+    <b>Карусель добавляется руками — вставкой картинки не переносятся.</b>
+    В тексте есть метка <span class="spot">— сюда карусель —</span>, замените её на изображения:
+    <ol>
+      <li>Поставьте курсор на строку с меткой и удалите её</li>
+      <li>Вставьте первое изображение (иконка фото на десктопе, скрепка на телефоне)</li>
+      <li>В правом верхнем углу картинки нажмите <b>+</b> и добавьте остальные</li>
+      <li>Рядом с плюсом нажмите <b>кнопку с плитками</b> — набор станет каруселью</li>
+      <li>Подпишите каждое изображение: подпись у каждого своя</li>
+    </ol>
+    Что показать: скриншоты из репозитория —
+    <code>examples/screenshots/article-en.png</code> и <code>article-ru.png</code>,
+    плюс снимок самой страницы с кнопкой копирования.
+  </div>
+
+</div>
+
+<!-- Текст для буфера -->
+<div id="tg-source" aria-hidden="true" style="position:absolute;left:-99999px;top:0;width:680px">
+
+<h1>Сделал навык, который пишет статьи прямо для Telegram</h1>
+
+<p>Этот пост не набирали в Telegram. Его написал ИИ-агент как веб-страницу, текст
+скопировали одним нажатием и вставили сюда — вместе с заголовками, таблицей и списками.
+Так работает навык, который я собрал и выложил в открытый доступ.</p>
+
+<blockquote>Оформление в Telegram структурное, а не визуальное. Вы выбираете роль элемента, а как он выглядит — решает клиент.</blockquote>
+
+<h2>Зачем он нужен</h2>
+
+<p>В Telegram есть режим статьи — <b>скрепка 📎 → «Статья»</b>. Там заголовки шести уровней,
+таблицы, списки, цитаты, блоки кода, картинки, карусели и формулы. Но редактор визуальный:
+если вставить в него HTML-код, на экране появится буквальный текст
+<code>&lt;h1&gt;Заголовок&lt;/h1&gt;</code>.</p>
+
+<p>Навык решает это так: агент отдаёт не код, а готовую страницу с кнопкой копирования.
+Нажали — и всё оформление переносится в редактор как есть.</p>
+
+<h2>Что умеет</h2>
+
+<table>
+<tr><th>Элемент</th><th>Для чего</th></tr>
+<tr><td>Заголовки, 6 уровней</td><td>Структура — и единственная «крупность»</td></tr>
+<tr><td>Таблицы</td><td>Однородные строки, как эта</td></tr>
+<tr><td>Списки</td><td>Шаги, факты, чек-листы</td></tr>
+<tr><td>Картинки и карусели</td><td>Свайп-галерея с подписью к каждой</td></tr>
+<tr><td>Блоки кода</td><td>Команды, с подсветкой</td></tr>
+<tr><td>Формулы</td><td>LaTeX, строкой или блоком</td></tr>
+</table>
+
+<h2>Как выглядит на практике</h2>
+
+<p>— сюда карусель —</p>
+
+<h2>Что я выяснил по дороге</h2>
+
+<p>Telegram нигде не описывает, что происходит при вставке, а опубликованные гайды прямо
+утверждают, что таблицы вставить нельзя. <b>Проверил — переносятся</b>: с шапкой,
+границами, заливкой строк и эмодзи в ячейке. Блок кода приезжает вместе с собственной
+кнопкой «копировать» от Telegram.</p>
+
+<p>Ещё одна деталь, которой нет в гайдах: <b>чек-лист внутри статьи авторский</b>. Галочки
+ставит только автор, читатель нажать не может. Если нужна интерактивность — это отдельная
+функция Telegram, обычным сообщением.</p>
+
+<h2>Чего редактор не умеет</h2>
+
+<ul>
+<li>Нет выбора шрифта и размера — крупность задаёт только уровень заголовка</li>
+<li>Нет цвета текста, есть только выделение</li>
+<li>Нет автосохранения — закрыли редактор до отправки, текст пропал</li>
+</ul>
+
+<h2>Что нужно, чтобы попробовать</h2>
+
+<p><b>Telegram Premium</b> — но только чтобы <i>публиковать</i> такие статьи.
+Читателям он не нужен: достаточно Telegram версии 12.8 и новее.</p>
+
+<hr>
+
+<h2>Ссылки</h2>
+
+<p>Репозиторий: <a href="https://github.com/uladzemer/telegram-article-skill">github.com/uladzemer/telegram-article-skill</a> — навык, справочник по редактору и готовый шаблон. Лицензия MIT, забирайте.</p>
+
+<p>Живая демонстрация: <a href="https://uladzemer.github.io/telegram-article-skill/">uladzemer.github.io/telegram-article-skill</a> — откройте, нажмите кнопку и вставьте в Telegram, чтобы увидеть, как это работает.</p>
+
+<p>Навык работает с <b>Claude Code</b>, <b>Codex</b> и другими агентами, которые читают файлы
+<code>SKILL.md</code>.</p>
+
+</div>
+
+<script>
+(function () {
+  var src = document.getElementById('tg-source');
+
+  // Превью: подсветим метку под карусель
+  var html = src.innerHTML.replace(
+    '<p>— сюда карусель —</p>',
+    '<p class="slot">— сюда карусель — <i>(добавьте изображения в редакторе)</i></p>'
+  );
+  document.getElementById('preview').innerHTML = html;
+
+  function tidy(s) { return s.replace(/\s+/g, ' ').trim(); }
+
+  function plain() {
+    var out = [];
+    Array.prototype.forEach.call(src.children, function (node) {
+      var tag = node.tagName.toLowerCase();
+      if (tag === 'ul' || tag === 'ol') {
+        var n = 1;
+        Array.prototype.forEach.call(node.children, function (li) {
+          out.push((tag === 'ol' ? n++ + '. ' : '• ') + tidy(li.textContent));
+        });
+        out.push('');
+      } else if (tag === 'table') {
+        node.querySelectorAll('tr').forEach(function (tr, i) {
+          if (i === 0 && tr.querySelector('th')) return;
+          var cells = Array.prototype.map.call(tr.children, function (td) { return tidy(td.textContent); });
+          out.push('• ' + cells.join(' — '));
+        });
+        out.push('');
+      } else if (tag === 'hr') {
+        out.push('———'); out.push('');
+      } else {
+        out.push(tidy(node.textContent)); out.push('');
+      }
+    });
+    return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function flash(btn, ok, msg) {
+    var keep = btn.innerHTML;
+    btn.innerHTML = ok ? '✅ Скопировано' : (msg || '⚠️ Не вышло');
+    btn.classList.toggle('done', ok);
+    setTimeout(function () { btn.innerHTML = keep; btn.classList.remove('done'); }, 2200);
+  }
+
+  function selectCopy() {
+    var probe = src.cloneNode(true);
+    probe.removeAttribute('id');
+    probe.removeAttribute('aria-hidden');
+    probe.style.cssText = 'position:fixed;left:0;top:0;width:680px;opacity:0;pointer-events:none;background:#fff;color:#000';
+    document.body.appendChild(probe);
+    var range = document.createRange();
+    range.selectNodeContents(probe);
+    var sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    sel.removeAllRanges();
+    document.body.removeChild(probe);
+    return ok;
+  }
+
+  function copyRich(btn) {
+    var h = src.innerHTML, text = plain();
+    if (navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
+      var item = new ClipboardItem({
+        'text/html':  new Blob([h], { type: 'text/html' }),
+        'text/plain': new Blob([text], { type: 'text/plain' })
+      });
+      navigator.clipboard.write([item]).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, selectCopy()); }
+      );
+    } else {
+      flash(btn, selectCopy());
+    }
+  }
+
+  function copyPlain(btn) {
+    var text = plain();
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, false, '⚠️ Выделите вручную'); }
+      );
+    } else {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(area);
+      flash(btn, ok, '⚠️ Выделите вручную');
+    }
+  }
+
+  document.querySelectorAll('.copybtn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.dataset.copy === 'rich') copyRich(btn); else copyPlain(btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>
