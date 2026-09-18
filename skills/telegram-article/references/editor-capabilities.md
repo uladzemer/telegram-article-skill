@@ -97,10 +97,18 @@ The editor accepts **rich clipboard content**. A browser copying rendered conten
 two flavors on the clipboard — `text/html` and `text/plain` — and the editor reads the
 HTML flavor, mapping it onto its own elements.
 
-**Verified 2026-09-18** (Telegram Desktop, Windows 11, Premium): a page with `h1`, `h2`,
-`p`, `ul`, `ol`, `table` and `b` was copied via `navigator.clipboard.write()` with a
-`text/html` flavor and pasted into the Article editor. **All of it transferred, including
-both tables.**
+**Verified 2026-09-18** (Telegram Desktop, Windows 11, Premium), twice and in two
+languages. A page with `h1`, `h2`, `p`, `ul`, `ol`, `table`, `blockquote`, `pre`, `hr`,
+`sup`/`sub` and `code` was copied via `navigator.clipboard.write()` with a `text/html`
+flavor and pasted into the Article editor.
+
+**Everything transferred**, including:
+
+- tables — with their header row, borders, alternating row fill and an emoji in a cell
+- code blocks — rendered with Telegram's own copy button attached
+- quotes, both list types, dividers, superscript and subscript, inline code, links
+
+Screenshots of the result: `examples/screenshots/` in this repository.
 
 ### This contradicts published guidance
 
@@ -108,10 +116,11 @@ Russian guides (T—J, Sports.ru, ppc.world) state that tables cannot be importe
 external applications and must be rebuilt by hand. Telegram documents paste behavior
 **nowhere** — not in the launch post, not in help.
 
-Treat the verified result as the working assumption, but have users **test one paragraph
-first**. Behavior may differ across Desktop / mobile / web and may change between releases.
-If a table does not survive on a given client, it is rebuilt with the ▦ button; the rest of
-the formatting still transfers.
+Behavior may still differ across Desktop / mobile / web and may change between releases,
+so have users **test one paragraph first** on an unfamiliar client. If a table ever fails,
+it is rebuilt with the ▦ button; the rest of the formatting still transfers.
+
+**Not yet tested:** mobile clients and web.telegram.org.
 
 ### Implementation
 
@@ -146,8 +155,9 @@ content inside it from being recognized as a block.
 
 - 🔴 **No autosave.** Close the editor before sending and the text is gone. This is the
   reason to write elsewhere and paste in.
-- 🔴 **Tables reportedly do not paste** from Excel/Sheets/external apps (our test
-  contradicts this for browser-rendered HTML — see above).
+- **Tables reportedly do not paste** from Excel/Sheets/external apps. Our test contradicts
+  this for browser-rendered HTML on Desktop (see above); spreadsheet sources may still
+  behave differently.
 - **No collaborative editing or commenting.**
 - **AI output needs checking** — accuracy is not guaranteed.
 - Image-upload bugs were reported in late June 2026, mostly fixed in later builds.
