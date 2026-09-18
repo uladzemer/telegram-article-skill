@@ -127,102 +127,59 @@
 
 <h1>Write proper articles in Telegram, from your agent</h1>
 
-<p>This message was not typed in Telegram. It was written by an AI agent as a web page,
-copied once, and pasted here — headings, tables, lists and all. That is the whole point of
-the <b>telegram-article</b> skill.</p>
+<p>This message was not typed here. An AI agent wrote it as a web page; it was copied once
+and pasted in — headings, tables and all. That is the <b>telegram-article</b> skill.</p>
 
-<blockquote>Formatting in Telegram is structural, not visual. You choose an element's role; the client decides how it looks.</blockquote>
+<blockquote>Formatting in Telegram is structural, not visual. You pick an element's role; the client decides how it looks.</blockquote>
 
-<h2>The problem it solves</h2>
+<h2>The problem</h2>
 
-<p>Telegram's Article editor is a visual editor. Paste HTML source into it and you get the
-literal text <code>&lt;h1&gt;Title&lt;/h1&gt;</code> on screen. Every agent that helpfully
-hands you an HTML file to "paste into Telegram" produces exactly that failure.</p>
+<p>The Article editor is visual. Paste HTML source and you get the literal text
+<code>&lt;h1&gt;Title&lt;/h1&gt;</code> on screen. The fix is copying a <b>rendered</b> page
+instead of its source — the clipboard carries structure.</p>
 
-<p>The fix is not a better HTML file. It is copying a <b>rendered</b> page instead of its
-source — the clipboard carries structure, and the editor reads it.</p>
-
-<h2>What the editor actually gives you</h2>
+<h2>What the editor gives you</h2>
 
 <table>
-<tr><th>Element</th><th>What it is for</th></tr>
+<tr><th>Element</th><th>For</th></tr>
 <tr><td>Headings, 6 levels</td><td>Structure — and your only size control</td></tr>
 <tr><td>Tables</td><td>Comparable rows, like this one</td></tr>
-<tr><td>Lists</td><td>Ordered steps, unordered facts, checklists</td></tr>
-<tr><td>Quotes</td><td>Full-width, or centered as an accent</td></tr>
-<tr><td>Code blocks</td><td>Commands and config, syntax highlighted</td></tr>
-<tr><td>Collapsible blocks</td><td>Long caveats the reader opens on demand</td></tr>
-<tr><td>Media 🎬</td><td>Images, video, audio, carousels between paragraphs</td></tr>
-<tr><td>Formulas</td><td>LaTeX, inline or as a block</td></tr>
+<tr><td>Lists</td><td>Steps, facts, checklists</td></tr>
+<tr><td>Code blocks 🎬</td><td>Commands, with highlighting</td></tr>
+<tr><td>Formulas</td><td>LaTeX, inline or block</td></tr>
 </table>
 
-<h2>What it does not give you</h2>
+<h2>What it does not</h2>
 
 <ul>
-<li>No font picker — the typeface is the client's</li>
-<li>No font size — heading level is the only size control</li>
-<li>No text color — only a highlight and table row shading</li>
-<li>No autosave — close the editor before sending and the text is gone</li>
+<li>No font picker, no font size — heading level is the only size control</li>
+<li>No text color, only highlight</li>
+<li>No autosave — close before sending and the text is gone</li>
 </ul>
 
-<p>So when someone asks for "a nicer font", the honest answer is: pick a heading level and
-use bold. Everything visual belongs to Telegram, not to the author.</p>
-
-<h2>How the skill works</h2>
+<h2>How it works</h2>
 
 <ol>
-<li>You describe the article you want, in plain language</li>
-<li>The agent writes it as a rendered page with a copy button</li>
-<li>You press the button and paste into 📎 → Article</li>
-<li>Images and formulas are added in the editor, where the draft marks their place</li>
+<li>You describe the article in plain language</li>
+<li>The agent writes it as a page with a copy button</li>
+<li>You paste into 📎 → Article</li>
+<li>Images and formulas are added in the editor</li>
 </ol>
 
-<h2>The part nobody documented</h2>
+<h2>The undocumented part</h2>
 
-<p>Telegram describes paste behavior <b>nowhere</b>, and published guides state that tables
-cannot be pasted at all. Tested on Telegram Desktop with Premium on 18 September 2026:
-<b>tables transferred</b>, along with everything else structural.</p>
+<p>Telegram documents paste behavior <b>nowhere</b>, and guides claim tables cannot be
+pasted. Tested on Desktop with Premium, 18 Sep 2026: <b>tables transferred</b>. Areas still
+scale as πr<sup>2</sup> and water is H<sub>2</sub>O.</p>
 
-<p>Because this is undocumented and may differ per client, the skill tells users to test one
-paragraph first, and to rebuild a table with the ▦ button if it ever fails.</p>
-
-<h2>Making a click do something</h2>
-
-<p>An author has hyperlinks — but Telegram links do more than open web pages:</p>
-
-<table>
-<tr><th>Goal</th><th>Link</th></tr>
-<tr><td>Open a bot</td><td>t.me/&lt;bot&gt;</td></tr>
-<tr><td>Launch a Mini App</td><td>t.me/&lt;bot&gt;?startapp=&lt;param&gt;</td></tr>
-<tr><td>Open app settings</td><td>tg://settings</td></tr>
-</table>
-
-<p>Buttons <i>inside</i> the text — the kind that make a message behave like an app — come
-from Bot API Rich Messages and need a bot, not the editor.</p>
-
-<h2>Technical detail, for the curious</h2>
-
-<p>The copy button writes two clipboard flavors at once, so the same press works for the
-Article editor and for a plain message field:</p>
-
-<pre><code>const item = new ClipboardItem({
-  'text/html':  new Blob([html],  { type: 'text/html' }),
-  'text/plain': new Blob([plain], { type: 'text/plain' })
-});
-await navigator.clipboard.write([item]);</code></pre>
-
-<p>Areas scale as πr<sup>2</sup>, water is H<sub>2</sub>O, and an article holds 32 768
-characters — eight times a normal message.</p>
+<pre><code>new ClipboardItem({ 'text/html': blob, 'text/plain': blob })</code></pre>
 
 <hr>
 
-<h2>What to look for in this message</h2>
+<p><b>Check this message:</b> six heading levels, a table with an emoji, two lists, a quote,
+a code block, a divider, super/subscript, inline code. Anything missing was stripped.</p>
 
-<p>If the paste worked, you are seeing: six heading levels, two tables (one with an emoji),
-a bulleted list, a numbered list, a quote, a code block, a divider, super- and subscript,
-inline code, and links. <b>Anything missing was stripped and must be added by hand.</b></p>
-
-<p>Skill and source: <a href="https://github.com/">github.com/telegram-article-skill</a> · MIT</p>
+<p><a href="https://github.com/uladzemer/telegram-article-skill">github.com/uladzemer/telegram-article-skill</a> · MIT</p>
 
 </div>
 
@@ -231,103 +188,61 @@ inline code, and links. <b>Anything missing was stripped and must be added by ha
 
 <h1>Как писать нормальные статьи в Telegram руками агента</h1>
 
-<p>Это сообщение не набирали в Telegram. Его написал ИИ-агент в виде веб-страницы, текст
-скопировали одним нажатием и вставили сюда — вместе с заголовками, таблицами и списками.
-В этом весь смысл навыка <b>telegram-article</b>.</p>
+<p>Это сообщение здесь не набирали. ИИ-агент написал его как веб-страницу, текст
+скопировали одним нажатием и вставили — вместе с заголовками и таблицами. Это навык
+<b>telegram-article</b>.</p>
 
 <blockquote>Оформление в Telegram структурное, а не визуальное. Вы выбираете роль элемента, а как он выглядит — решает клиент.</blockquote>
 
-<h2>Какую проблему он решает</h2>
+<h2>Проблема</h2>
 
-<p>Редактор статей — визуальный. Если вставить в него HTML-код, на экране появится
-буквальный текст <code>&lt;h1&gt;Заголовок&lt;/h1&gt;</code>. Любой агент, который выдаёт
-«вот HTML-файл, вставьте в телеграм», приводит ровно к этому.</p>
+<p>Редактор статей визуальный. Вставьте в него HTML-код — и на экране будет буквальный
+текст <code>&lt;h1&gt;Заголовок&lt;/h1&gt;</code>. Решение — копировать
+<b>отрендеренную</b> страницу вместо исходника: буфер несёт структуру.</p>
 
-<p>Решение — не «файл получше», а копировать <b>отрендеренную</b> страницу вместо исходника:
-буфер обмена несёт структуру, и редактор её принимает.</p>
-
-<h2>Что редактор реально умеет</h2>
+<h2>Что редактор умеет</h2>
 
 <table>
 <tr><th>Элемент</th><th>Для чего</th></tr>
 <tr><td>Заголовки, 6 уровней</td><td>Структура — и единственная «крупность»</td></tr>
 <tr><td>Таблицы</td><td>Однородные строки, как эта</td></tr>
-<tr><td>Списки</td><td>Шаги по порядку, факты, чек-листы</td></tr>
-<tr><td>Цитаты</td><td>На всю ширину или выноской по центру</td></tr>
-<tr><td>Блоки кода</td><td>Команды и конфиги, с подсветкой</td></tr>
-<tr><td>Сворачиваемые блоки</td><td>Длинные оговорки, которые читатель раскроет сам</td></tr>
-<tr><td>Медиа 🎬</td><td>Картинки, видео, аудио, карусели между абзацами</td></tr>
+<tr><td>Списки</td><td>Шаги, факты, чек-листы</td></tr>
+<tr><td>Блоки кода 🎬</td><td>Команды, с подсветкой</td></tr>
 <tr><td>Формулы</td><td>LaTeX, строкой или блоком</td></tr>
 </table>
 
-<h2>Чего он не умеет</h2>
+<h2>Чего не умеет</h2>
 
 <ul>
-<li>Нет выбора шрифта — гарнитуру задаёт клиент</li>
-<li>Нет размера кегля — крупность задаётся только уровнем заголовка</li>
-<li>Нет цвета текста — только выделение и заливка строк таблицы</li>
-<li>Нет автосохранения — закрыли редактор до отправки, текст пропал</li>
+<li>Нет выбора шрифта и кегля — крупность задаёт только уровень заголовка</li>
+<li>Нет цвета текста — только выделение</li>
+<li>Нет автосохранения — закрыли до отправки, текст пропал</li>
 </ul>
 
-<p>Поэтому на просьбу «сделай шрифт покрасивее» честный ответ такой: выберите уровень
-заголовка и используйте жирный. Всё визуальное принадлежит Telegram, а не автору.</p>
-
-<h2>Как работает навык</h2>
+<h2>Как это работает</h2>
 
 <ol>
-<li>Вы своими словами описываете нужную статью</li>
-<li>Агент пишет её как отрендеренную страницу с кнопкой копирования</li>
-<li>Вы жмёте кнопку и вставляете в 📎 → «Статья»</li>
-<li>Картинки и формулы добавляются уже в редакторе — в черновике помечено, где именно</li>
+<li>Вы своими словами описываете статью</li>
+<li>Агент пишет её как страницу с кнопкой копирования</li>
+<li>Вы вставляете в 📎 → «Статья»</li>
+<li>Картинки и формулы добавляются уже в редакторе</li>
 </ol>
 
-<h2>То, чего никто не описал</h2>
+<h2>Недокументированная часть</h2>
 
-<p>Telegram <b>нигде</b> не документирует поведение вставки, а опубликованные гайды прямо
-утверждают, что таблицы вставить нельзя. Проверено на Telegram Desktop с Premium
-18 сентября 2026 года: <b>таблицы переносятся</b>, как и всё остальное структурное.</p>
+<p>Telegram <b>нигде</b> не описывает поведение вставки, а гайды утверждают, что таблицы
+вставить нельзя. Проверено на Desktop с Premium 18.09.2026: <b>таблицы переносятся</b>.
+Площадь по-прежнему считается как πr<sup>2</sup>, а вода — H<sub>2</sub>O.</p>
 
-<p>Поскольку это недокументировано и может отличаться на разных клиентах, навык советует
-сначала проверить на одном абзаце, а если таблица не доехала — собрать её кнопкой ▦.</p>
-
-<h2>Как сделать клик действием</h2>
-
-<p>Автору доступны гиперссылки — но телеграмные ссылки умеют больше, чем открывать сайты:</p>
-
-<table>
-<tr><th>Что нужно</th><th>Ссылка</th></tr>
-<tr><td>Открыть бота</td><td>t.me/&lt;бот&gt;</td></tr>
-<tr><td>Запустить Mini App</td><td>t.me/&lt;бот&gt;?startapp=&lt;параметр&gt;</td></tr>
-<tr><td>Открыть настройки</td><td>tg://settings</td></tr>
-</table>
-
-<p>Кнопки <i>внутри</i> текста — те, из-за которых сообщение ведёт себя как приложение —
-делаются через Bot API Rich Messages и требуют бота, а не редактора.</p>
-
-<h2>Техническая деталь для любопытных</h2>
-
-<p>Кнопка копирования кладёт в буфер сразу два слоя, поэтому одно нажатие годится и для
-редактора статей, и для обычного поля сообщения:</p>
-
-<pre><code>const item = new ClipboardItem({
-  'text/html':  new Blob([html],  { type: 'text/html' }),
-  'text/plain': new Blob([plain], { type: 'text/plain' })
-});
-await navigator.clipboard.write([item]);</code></pre>
-
-<p>Площадь считается как πr<sup>2</sup>, вода — это H<sub>2</sub>O, а статья вмещает
-32 768 символов: в восемь раз больше обычного сообщения.</p>
+<pre><code>new ClipboardItem({ 'text/html': blob, 'text/plain': blob })</code></pre>
 
 <hr>
 
-<h2>Что проверить в этом сообщении</h2>
+<p><b>Проверьте это сообщение:</b> шесть уровней заголовков, таблица с эмодзи, два списка,
+цитата, блок кода, разделитель, надстрочный и подстрочный знаки, моноширинный текст.
+Всё, чего нет, — срезалось при вставке.</p>
 
-<p>Если вставка удалась, вы видите: шесть уровней заголовков, две таблицы (в одной эмодзи),
-маркированный список, нумерованный список, цитату, блок кода, разделитель, надстрочный и
-подстрочный знаки, моноширинный текст и ссылки.
-<b>Всё, чего не хватает, срезалось при вставке и добавляется вручную.</b></p>
-
-<p>Навык и исходники: <a href="https://github.com/">github.com/telegram-article-skill</a> · MIT</p>
+<p><a href="https://github.com/uladzemer/telegram-article-skill">github.com/uladzemer/telegram-article-skill</a> · MIT</p>
 
 </div>
 

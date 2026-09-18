@@ -65,7 +65,7 @@ technical writeup with math, and changelog.
 **Claude Code** — copy the skill into your skills directory:
 
 ```bash
-git clone https://github.com/<you>/telegram-article-skill.git
+git clone https://github.com/uladzemer/telegram-article-skill.git
 cp -r telegram-article-skill/skills/telegram-article ~/.claude/skills/
 ```
 
@@ -182,7 +182,7 @@ examples/
 **Claude Code:**
 
 ```bash
-git clone https://github.com/<you>/telegram-article-skill.git
+git clone https://github.com/uladzemer/telegram-article-skill.git
 cp -r telegram-article-skill/skills/telegram-article ~/.claude/skills/
 ```
 

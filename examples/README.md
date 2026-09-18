@@ -13,8 +13,8 @@ Each article contains:
 
 | Element | Count |
 |---|---|
-| Headings (H1 + H2) | 9 |
-| Tables | 2 (one with an emoji cell) |
+| Headings (H1 + H2) | 6 |
+| Table | 1, with an emoji cell |
 | Lists | 2 (bulleted + numbered) |
 | Quote | 1 |
 | Code block | 1 |
@@ -22,16 +22,25 @@ Each article contains:
 | Super / subscript | 2 |
 | Inline code, links, bold, italic | throughout |
 
+Each article is roughly **1 800 characters** — short enough to screenshot in one or two
+shots, while still exercising every structural element.
+
 Elements that **cannot** arrive through a paste — images, carousels, formulas, pull-quotes,
 collapsible blocks, spoilers, highlight — are added in the editor by hand. The articles say so.
 
 ### What to verify when pasting
 
-1. Do all six heading levels come through as distinct sizes?
-2. **Do the tables survive?** Published guides say they cannot; our test says they do.
-3. Does the checklist become a real checklist — and can a *reader* tick the boxes?
-4. Does the nested list keep its second level, or flatten?
-5. Does the code block keep its line breaks?
+1. **Does the table survive?** Published guides say tables cannot be pasted; our test says
+   they can. This is the headline question.
+2. Do the heading levels come through as distinct sizes?
+3. Does the code block keep its line breaks and monospace?
+4. Do super- and subscript survive (πr² and H₂O)?
+5. Does the emoji inside the table cell render?
+6. Does the quote become a real quote block?
+
+Separately worth testing by hand in the editor, since no paste can carry them: whether a
+**checklist** created with the editor's own list style is tickable by a *reader*, and how
+images, carousels and formulas behave.
 
 ## Screenshots
 
