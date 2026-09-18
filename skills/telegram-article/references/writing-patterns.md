@@ -5,6 +5,10 @@ The editor gives you structure. These patterns decide what to put in it.
 Everything here assumes the reader is on a phone, scrolling, deciding within two seconds
 whether to keep reading.
 
+Patterns below: **launch**, **promo**, **digest**, **guide**, **longread**,
+**technical writeup**, **changelog**. Then notes on media and on making parts of an
+article clickable.
+
 ## Universal rules
 
 1. **Hook first, mechanics later.** The first screen sells; the rest explains.
@@ -89,6 +93,82 @@ H2  In short
 Put the summary at the **end**, not the start. Readers who scrolled through earned the recap;
 readers who did not will scroll anyway.
 
+## Pattern: guide / how-to
+
+```
+H1  What the reader will be able to do
+
+    One paragraph: who this is for, what it assumes
+
+H2  Before you start
+    Checklist or list: prerequisites, versions, accounts
+
+H2  Step 1 — <action>       ← one H2 per step for long guides
+    Prose, then the commands in a code block
+    Screenshot after the step it illustrates, not before
+
+H2  Step N — <action>
+
+H2  If something goes wrong
+    Table: symptom / cause / fix     ← the most reused part of any guide
+
+    Collapsible block: deeper background for the curious
+```
+
+Screenshots go **after** the step they show. A reader follows text, then confirms
+against the image. Reversed, they compare an image to a state they have not reached.
+
+Put troubleshooting in a table. It is what people return to the article for, and a table
+is scannable in a way prose is not.
+
+## Pattern: longread / analysis
+
+```
+H1  The claim, not the topic
+    ("Why X stopped working", not "About X")
+
+    Opening: the concrete detail that makes the question real
+
+    Pull-quote: the sentence the piece rests on
+
+H2  Section per movement of the argument
+    Headings that read as an outline on their own
+
+    Collapsible block: derivations, caveats, methodology
+
+H2  What follows from this
+    Bulleted list: conclusions
+
+    Footer: sources
+```
+
+Headings are a table of contents. Read them top to bottom with nothing between —
+they should still tell the story.
+
+Use a pull-quote once. Twice and it stops being an accent.
+
+## Pattern: technical writeup with math
+
+```
+H1  Result first
+
+    What was measured or proven, in a sentence
+
+H2  Setup
+    Formula (block) for the model or definition
+
+H2  Derivation
+    Inline formulas inside prose; block formulas for the steps that matter
+
+H2  Result
+    Table: parameter / value / unit
+```
+
+Formulas are a native element — LaTeX source, rendered by the editor. Never paste an
+image of a formula: it does not scale, does not adapt to theme, and cannot be copied.
+
+Deliver the LaTeX in a copyable block so the user pastes it into the formula element.
+
 ## Pattern: changelog / update
 
 ```
@@ -149,6 +229,45 @@ on why it matters. Vague "write to us" produces nothing; naming the button produ
 - Two lists became tables once they had uniform second columns.
 - The platform requirement moved from the footer to above the steps.
 - "Register" became the exact login-screen wording, including all three sign-in methods.
+
+## Using media well
+
+Media is added **in the editor**, not through the paste. Mark intended positions in the
+draft so the user knows where each item goes.
+
+- **One image per idea.** A stack of screenshots is a stack of screenshots; a carousel
+  is one object the reader swipes.
+- **Caption every image.** Each media item takes its own caption, and readers of scanned
+  articles read captions before body text.
+- **Screenshots after the step**, diagrams before the explanation. The first confirms,
+  the second orients.
+- **A carousel for alternatives or a sequence** — variants of a design, stages of a
+  process. Not for unrelated images.
+- **No images inside tables** — cells take text and emoji only. If a row needs a picture,
+  the table is the wrong structure.
+- Video and audio sit between paragraphs like images. Say what the reader will see or
+  hear before it plays; autoplay decisions are not yours to make.
+
+## Making parts of an article clickable
+
+Within the editor an author has **hyperlinks** — but Telegram links can do more than open
+a web page:
+
+| Goal | Link |
+|---|---|
+| Open a bot | `t.me/<bot>` |
+| Open a bot with a parameter | `t.me/<bot>?start=<param>` |
+| **Launch a Mini App** | `t.me/<bot>?startapp=<param>` |
+| Open a named Mini App | `t.me/<bot>/<short_name>?startapp=<param>` |
+| Add bot to a group | `t.me/<bot>?startgroup=<param>` |
+| Open app settings | `tg://settings/<path>` |
+
+Written on a phrase like **"Open the app"**, a deep link reads as a button and behaves
+like one. This covers most cases where an author wants a click to *do* something.
+
+What it cannot do: react without leaving the message, change the article in place, or run
+server logic. Those need a bot posting a Rich Message with real in-text buttons — a
+different build, described in `editor-capabilities.md`.
 
 ## Language notes
 
