@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telegram Article — copy template</title>
+<style>
+  /* Page styling is for the browser only. None of it reaches Telegram —
+     the editor keeps structure, not appearance. Style freely. */
+  :root { --bg:#0b0b0f; --card:#15151d; --line:#2a2a38; --text:#f2f2f5; --muted:#a5a5b5; --accent:#2f81f7; }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; padding:40px 16px 64px; background:var(--bg); color:var(--text);
+    font:16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width:660px; margin:0 auto; }
+  .copybox { margin:34px 0 0; padding:22px; border:1px dashed var(--line); border-radius:16px; text-align:center; }
+  .copybox h3 { margin:0 0 6px; font-size:17px; }
+  .copybox > p { margin:0 0 16px; color:var(--muted); font-size:14px; }
+  .copyrow { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .copybtn {
+    padding:13px 22px; border-radius:11px; border:1px solid var(--line);
+    background:#1c1c26; color:var(--text); font:inherit; font-size:15px; font-weight:600; cursor:pointer;
+  }
+  .copybtn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .copybtn.done { background:rgba(74,222,128,.15); border-color:rgba(74,222,128,.45); color:#bff3d0; }
+  .copybtn small { display:block; font-weight:400; font-size:12px; opacity:.8; margin-top:2px; }
+  .howto { margin:20px auto 0; padding:0 0 0 20px; max-width:440px; text-align:left; color:var(--muted); font-size:14px; }
+  .howto b { color:var(--text); }
+  .warn {
+    margin:18px 0 0; padding:12px 14px; border-radius:10px; text-align:left; font-size:13px; color:var(--muted);
+    background:rgba(229,9,20,.08); border:1px solid rgba(229,9,20,.25);
+  }
+  .warn b { color:var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ==========================================================
+       1. Your styled announcement goes here — this is what the
+          user reads in the browser. Style it however you like.
+       ========================================================== -->
+
+  <div class="copybox">
+    <h3>Copy for Telegram</h3>
+    <p>
+      The Article editor <b>does not understand HTML source</b> — tags would appear as plain text.
+      It understands formatting from the clipboard. The button below puts exactly that there.
+    </p>
+    <div class="copyrow">
+      <button class="copybtn primary" data-copy="rich">Copy with formatting<small>headings, lists, tables</small></button>
+      <button class="copybtn" data-copy="plain">Copy as plain text<small>if formatting breaks</small></button>
+    </div>
+    <ol class="howto">
+      <li>Press <b>Copy with formatting</b></li>
+      <li>In Telegram: <b>paperclip 📎 → "Article"</b></li>
+      <li>Paste: <b>Ctrl + V</b> (⌘ + V on Mac)</li>
+      <li>Check the result — if a table did not survive, rebuild it with the <b>▦</b> button</li>
+    </ol>
+    <p class="warn">
+      ⚠️ The Article editor requires <b>Telegram Premium</b> and has <b>no autosave</b> —
+      do not close the window before sending. Test on one paragraph first.
+    </p>
+  </div>
+
+</div>
+
+<!-- ==========================================================
+     2. The editor-facing block.
+
+     Semantic tags only: h1 h2 p b i a ul ol li table tr th td.
+     No class, no style, no div/span wrappers — they are stripped.
+
+     It must be RENDERED to be selectable, so it is positioned
+     off-screen rather than display:none or <template>.
+     The explicit width helps clients derive table proportions.
+     ========================================================== -->
+<div id="tg-source" aria-hidden="true" style="position:absolute;left:-99999px;top:0;width:680px">
+
+<h1>Headline — the offer in one line</h1>
+
+<p>Lead paragraph. What this is and why the reader should care, in two or three sentences.</p>
+
+<p><b>Continuity line if relevant</b> — what has not changed, so existing users do not worry.</p>
+
+<h2>What's inside</h2>
+
+<table>
+<tr><th>Item</th><th>What it gives</th></tr>
+<tr><td>First</td><td>Benefit phrase</td></tr>
+<tr><td>Second</td><td>Benefit phrase</td></tr>
+<tr><td>Third</td><td>Benefit phrase</td></tr>
+</table>
+
+<p>Any exclusion goes here, right after the table.</p>
+
+<h2>Before you start</h2>
+
+<p>Blocking requirements — platform, device, account. <b>Above the steps, not below.</b></p>
+
+<h2>How to get access</h2>
+
+<ol>
+<li>First action, with the <a href="https://example.com">link</a> and the exact <b>"Button name"</b></li>
+<li>Second action</li>
+<li>Third action</li>
+</ol>
+
+<p>Closing line: what the reader ends up with.</p>
+
+<h2>What to know</h2>
+
+<table>
+<tr><th>Condition</th><th>Detail</th></tr>
+<tr><td>Requirement</td><td>Detail</td></tr>
+<tr><td>Limit</td><td>Detail</td></tr>
+<tr><td>Deadline</td><td>Detail</td></tr>
+</table>
+
+<h2>Feedback</h2>
+
+<p>Exact navigation path and exact button names, then one sentence on why it matters now.</p>
+
+<p><b>👉 <a href="https://example.com">example.com</a></b></p>
+
+</div>
+
+<script>
+(function () {
+  var src = document.getElementById('tg-source');
+
+  function tidy(s) { return s.replace(/\s+/g, ' ').trim(); }
+
+  // Plain-text variant: lists become bullets, table rows collapse to "cell — cell".
+  function plain() {
+    var out = [];
+    Array.prototype.forEach.call(src.children, function (node) {
+      var tag = node.tagName.toLowerCase();
+      if (tag === 'ul' || tag === 'ol') {
+        var n = 1;
+        node.querySelectorAll('li').forEach(function (li) {
+          out.push((tag === 'ol' ? n++ + '. ' : '• ') + tidy(li.textContent));
+        });
+        out.push('');
+      } else if (tag === 'table') {
+        node.querySelectorAll('tr').forEach(function (tr, i) {
+          if (i === 0 && tr.querySelector('th')) return;   // skip header row
+          var cells = Array.prototype.map.call(tr.children, function (td) { return tidy(td.textContent); });
+          out.push('• ' + cells.join(' — '));
+        });
+        out.push('');
+      } else {
+        out.push(tidy(node.textContent));
+        out.push('');
+      }
+    });
+    return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function flash(btn, ok, msg) {
+    var keep = btn.innerHTML;
+    btn.innerHTML = ok ? '✅ Copied' : (msg || '⚠️ Failed');
+    btn.classList.toggle('done', ok);
+    setTimeout(function () { btn.innerHTML = keep; btn.classList.remove('done'); }, 2200);
+  }
+
+  // Both flavors: the editor reads text/html, a normal message field reads text/plain.
+  function copyRich(btn) {
+    var html = src.innerHTML;
+    var text = plain();
+
+    if (navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
+      var item = new ClipboardItem({
+        'text/html':  new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([text], { type: 'text/plain' })
+      });
+      navigator.clipboard.write([item]).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, selectCopy()); }
+      );
+    } else {
+      flash(btn, selectCopy());
+    }
+  }
+
+  // Fallback for non-secure contexts: select a rendered clone and copy the selection.
+  function selectCopy() {
+    var probe = src.cloneNode(true);
+    probe.removeAttribute('id');
+    probe.removeAttribute('aria-hidden');
+    probe.style.cssText = 'position:fixed;left:0;top:0;width:680px;opacity:0;pointer-events:none;background:#fff;color:#000';
+    document.body.appendChild(probe);
+
+    var range = document.createRange();
+    range.selectNodeContents(probe);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+
+    sel.removeAllRanges();
+    document.body.removeChild(probe);
+    return ok;
+  }
+
+  function copyPlain(btn) {
+    var text = plain();
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, false, '⚠️ Select manually'); }
+      );
+    } else {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(area);
+      flash(btn, ok, '⚠️ Select manually');
+    }
+  }
+
+  document.querySelectorAll('.copybtn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.dataset.copy === 'rich') copyRich(btn); else copyPlain(btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>
