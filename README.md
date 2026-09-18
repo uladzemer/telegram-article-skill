@@ -5,6 +5,16 @@
   <a href="README.ru.md">Русский</a>
 </p>
 
+<p align="center">
+  <img src="examples/screenshots/article-en.png" width="46%" alt="The showcase article pasted into Telegram, in English">
+  <img src="examples/screenshots/article-ru.png" width="46%" alt="The same article in Russian">
+</p>
+
+<p align="center">
+  <i>Written by an agent as a web page, copied once, pasted into Telegram's Article editor.<br>
+  Headings, tables, lists, quotes and code blocks all survive the paste.</i>
+</p>
+
 An agent skill for writing well-formatted articles in Telegram's built-in
 **Rich Text Editor** (paperclip 📎 → "Article", Telegram 12.9+) — headings, tables, lists,
 quotes, collapsible blocks, images, carousels and LaTeX formulas.

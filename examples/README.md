@@ -33,13 +33,18 @@ collapsible blocks, spoilers, highlight — are added in the editor by hand. The
 
 ### What to verify when pasting
 
-1. **Does the table survive?** Published guides say tables cannot be pasted; our test says
-   they can. This is the headline question.
-2. Do the heading levels come through as distinct sizes?
-3. Does the code block keep its line breaks and monospace?
-4. Do super- and subscript survive (πr² and H₂O)?
-5. Does the emoji inside the table cell render?
-6. Does the quote become a real quote block?
+All of the following were confirmed on Telegram Desktop (see the screenshots above).
+Re-run them when testing an unfamiliar client:
+
+1. **Does the table survive?** ✅ on Desktop — the headline question, and the one published
+   guides get wrong.
+2. Do the heading levels come through as distinct sizes? ✅
+3. Does the code block keep its line breaks and monospace? ✅
+4. Do super- and subscript survive (πr², H₂O)? ✅
+5. Does the emoji inside the table cell render? ✅
+6. Does the quote become a real quote block? ✅
+
+**Still untested:** mobile clients and web.telegram.org.
 
 Separately worth testing by hand in the editor, since no paste can carry them: whether a
 **checklist** created with the editor's own list style is tickable by a *reader*, and how
@@ -47,15 +52,20 @@ images, carousels and formulas behave.
 
 ## Screenshots
 
-Results of pasting `showcase.html` into the Telegram Article editor.
+Both articles pasted into the Telegram Article editor — Desktop, Windows, Premium,
+18 September 2026.
 
-<!-- Add screenshots here as they are captured:
-![English article in the editor](screenshots/en-editor.png)
-![Russian article in the editor](screenshots/ru-editor.png)
-![Published article as readers see it](screenshots/published.png)
--->
+| English | Russian |
+|---|---|
+| ![English article in Telegram](screenshots/article-en.png) | ![Russian article in Telegram](screenshots/article-ru.png) |
 
-_Not captured yet._
+**What the paste carried across:** all headings, both tables — complete with header row,
+borders, alternating row fill and the 🎬 emoji in a cell — the quote, both list types, the
+code block (which Telegram rendered with its own copy button), the divider, superscript and
+subscript (πr², H₂O), inline code and links.
+
+Nothing had to be rebuilt by hand. This contradicts published guides, which state that
+tables cannot be pasted at all.
 
 ## copy-button.html
 
