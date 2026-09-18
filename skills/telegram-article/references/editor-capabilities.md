@@ -41,18 +41,22 @@ level, and use highlight or bold for emphasis. Nothing else exists.
 | **Collapsible block** | Text hidden behind a heading; reader clicks to expand. Implemented as a variant of the quote ("collapsible quote"). Good for long caveats, spoilers, secondary detail. |
 | **Footer / footnote** | A note line at the end of the article — sources, disclaimers, small print. Whether it supports numbered anchors tied to positions in the text is **not found**; descriptions suggest a single trailing line. |
 | **Divider** | Horizontal rule |
-| **Lists** | Bulleted, numbered, and checklist |
+| **Lists** | Bulleted, numbered, and checklist (checklist is author-only — see below) |
 | **Table** | See below |
 
-### Checklists — open question
+### Checklists — author-only
 
-The editor offers a checklist list style. Whether a **reader** can tick its boxes is
-**unconfirmed**: guides describe clicking a box *while authoring*. Telegram separately
-ships **native checklists** (a distinct feature, sent from the attachment menu) which
-*are* interactive and track completion per user — with an `others_can_complete` option.
+**Verified 2026-09-18** (Telegram Desktop, Premium, tested across two accounts in a private
+chat): a checklist inside an article is **not interactive for the reader**. The author can
+tick boxes; the recipient cannot click them at all.
 
-Do not promise reader-interactive checkboxes inside an article. If interaction matters,
-send a native checklist as its own message.
+So the checklist here is an authoring device — a way to render a list with boxes and set
+their state before sending — not a shared or per-reader control. The guides that describe
+"clicking a box" were describing the authoring side.
+
+**If readers need to tick things off, send a native checklist instead** — a separate Telegram
+feature from the attachment menu, which is interactive, tracks completion per user and has an
+`others_can_complete` option. It cannot live inside an article; it is its own message.
 
 ### Tables
 
