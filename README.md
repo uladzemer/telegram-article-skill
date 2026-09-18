@@ -47,7 +47,15 @@ skills/telegram-article/
 │   └── writing-patterns.md             # structures for launches, promos, digests, changelogs
 └── assets/
     └── copy-button.html                # working drop-in template
+
+examples/
+└── showcase.html                       # two ready-to-paste articles (EN + RU) that
+                                        # explain the skill and demo every element
 ```
+
+**Try it in one minute:** open [`examples/showcase.html`](examples/showcase.html) in a
+browser, press *Copy with formatting*, and paste into Telegram (📎 → Article). The pasted
+article explains the skill and lists what to check.
 
 Writing patterns included: product launch, promo, digest, how-to guide, longread,
 technical writeup with math, and changelog.
@@ -156,7 +164,15 @@ skills/telegram-article/
 │   └── writing-patterns.md             # структуры под запуск, акцию, дайджест, changelog
 └── assets/
     └── copy-button.html                # готовый рабочий шаблон
+
+examples/
+└── showcase.html                       # две готовые статьи (EN + RU), которые
+                                        # рассказывают о навыке и показывают все элементы
 ```
+
+**Попробовать за минуту:** откройте [`examples/showcase.html`](examples/showcase.html) в
+браузере, нажмите *«Скопировать с оформлением»* и вставьте в Telegram (📎 → «Статья»).
+Вставленная статья сама объясняет навык и перечисляет, что проверить.
 
 Структуры в комплекте: запуск продукта, акция, дайджест, инструкция, лонгрид,
 технический разбор с формулами, changelog.
