@@ -6,7 +6,10 @@ Two ready-to-paste articles — **English and Russian** — that explain the ski
 demonstrating every element the Article editor supports. Each one is simultaneously a demo
 and the documentation: paste it into Telegram and the article tells you what to look for.
 
-Open the file in a browser and press **Copy with formatting**, then in Telegram:
+**Live page: [uladzemer.github.io/telegram-article-skill](https://uladzemer.github.io/telegram-article-skill/)** — the same file, served
+over https so the copy button works without a local server.
+
+Open it (or this file locally) and press **Copy with formatting**, then in Telegram:
 **paperclip 📎 → "Article" → Ctrl+V**.
 
 Each article contains:
