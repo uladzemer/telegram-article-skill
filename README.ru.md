@@ -6,13 +6,14 @@
 </p>
 
 <p align="center">
-  <img src="examples/screenshots/article-en.png" width="46%" alt="Статья из примера, вставленная в Telegram — английская версия">
-  <img src="examples/screenshots/article-ru.png" width="46%" alt="Та же статья по-русски">
+  <a href="https://github.com/uladzemer/telegram-article-skill/blob/main/examples/screenshots/article-ru.png">
+    <img src="examples/screenshots/article-ru.png" width="340" alt="Статья из примера, вставленная в режим статьи Telegram">
+  </a>
 </p>
 
 <p align="center">
   <i>Написано агентом как веб-страница, скопировано одним нажатием, вставлено в режим статьи.<br>
-  Заголовки, таблицы, списки, цитаты и блоки кода переживают вставку.</i>
+  Заголовки, таблицы, списки, цитаты и блоки кода переживают вставку — нажмите, чтобы увеличить.</i>
 </p>
 
 Навык для агентов, который пишет красиво оформленные статьи во встроенном
