@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проверка чек-листа — Telegram</title>
+<style>
+  :root { --bg:#0b0b0f; --card:#15151d; --line:#2a2a38; --text:#f2f2f5; --muted:#a5a5b5; --accent:#2f81f7; --warn:#ffcc66; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; padding:40px 16px 72px; background:var(--bg); color:var(--text);
+    font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width:720px; margin:0 auto; }
+  h1.page { font-size:28px; line-height:1.2; margin:0 0 8px; letter-spacing:-0.02em; }
+  .sub { color:var(--muted); margin:0 0 26px; }
+
+  .warn {
+    padding:16px 18px; border-radius:14px; margin:0 0 22px;
+    background:rgba(255,204,102,.08); border:1px solid rgba(255,204,102,.3);
+    font-size:15px;
+  }
+  .warn b { color:var(--warn); }
+
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; margin:0 0 18px; }
+  .panel h2 { margin:0 0 6px; font-size:18px; }
+  .panel > p { color:var(--muted); font-size:14px; margin:0 0 16px; }
+
+  .copyrow { display:flex; gap:10px; flex-wrap:wrap; }
+  .copybtn {
+    padding:13px 22px; border-radius:11px; border:1px solid var(--line); background:#1c1c26;
+    color:var(--text); font:inherit; font-size:15px; font-weight:600; cursor:pointer;
+  }
+  .copybtn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .copybtn.done { background:rgba(74,222,128,.15); border-color:rgba(74,222,128,.45); color:#bff3d0; }
+  .copybtn small { display:block; font-weight:400; font-size:12px; opacity:.8; margin-top:2px; }
+
+  ol.steps { margin:0; padding-left:22px; font-size:15px; }
+  ol.steps li { margin:9px 0; }
+  ol.steps b { color:var(--text); }
+  .kbd {
+    display:inline-block; padding:2px 8px; border-radius:6px; font-size:13px;
+    background:rgba(255,255,255,.08); border:1px solid var(--line);
+  }
+
+  table.res { width:100%; border-collapse:collapse; font-size:14px; margin:14px 0 0; }
+  table.res th, table.res td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.res th { color:var(--muted); font-weight:600; }
+  table.res td:first-child { white-space:nowrap; }
+
+  .preview { margin:14px 0 0; border:1px solid var(--line); border-radius:12px; padding:20px; background:#fff; color:#111; }
+  .preview h1 { font-size:22px; margin:0 0 12px; }
+  .preview h2 { font-size:17px; margin:18px 0 8px; }
+  .preview p { margin:0 0 10px; }
+  .preview ul, .preview ol { margin:0 0 10px; padding-left:22px; }
+  .preview li { margin:4px 0; }
+  details { margin:14px 0 0; }
+  summary { cursor:pointer; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="page">Проверка чек-листа</h1>
+  <p class="sub">
+    Выясняем одну вещь: может ли <b>читатель</b> ставить галочки в чек-листе внутри статьи,
+    или это только визуальный стиль списка.
+  </p>
+
+  <div class="warn">
+    <b>Важно:</b> чек-лист нельзя перенести вставкой — квадратики приедут обычными символами.
+    Настоящий чек-лист создаётся <b>кнопкой самого редактора</b>. Поэтому порядок такой:
+    сначала вставляете текст-обёртку, потом добавляете чек-лист руками.
+  </div>
+
+  <div class="panel">
+    <h2>Шаг 1 — скопировать текст-обёртку</h2>
+    <p>Короткое сообщение, в которое вы добавите чек-лист. Вставляется как обычно.</p>
+    <div class="copyrow">
+      <button class="copybtn primary" data-copy="rich">Скопировать с оформлением<small>вставить в режим статьи</small></button>
+      <button class="copybtn" data-copy="plain">Скопировать текстом<small>запасной вариант</small></button>
+    </div>
+    <details>
+      <summary>Показать, что будет скопировано</summary>
+      <div class="preview" id="preview"></div>
+    </details>
+  </div>
+
+  <div class="panel">
+    <h2>Шаг 2 — что делать в Telegram</h2>
+    <ol class="steps">
+      <li>Откройте чат <b>со вторым аккаунтом</b> (личный чат, не пересылка)</li>
+      <li><b>📎 → «Статья»</b>, вставьте текст: <span class="kbd">Ctrl + V</span></li>
+      <li>Поставьте курсор на строку <b>«— сюда чек-лист —»</b> и удалите её</li>
+      <li>На панели редактора нажмите кнопку списка <span class="kbd">⋮≡</span> и выберите
+          <b>чек-лист</b> — пункты с квадратиками, а не с точками</li>
+      <li>Напишите три пункта, например: <i>первое, второе, третье</i></li>
+      <li><b>Отправьте</b> сообщение</li>
+      <li>Зайдите <b>вторым аккаунтом</b> и попробуйте нажать на квадратик</li>
+    </ol>
+  </div>
+
+  <div class="panel">
+    <h2>Шаг 3 — что означает результат</h2>
+    <table class="res">
+      <tr><th>Что видите</th><th>Вывод</th></tr>
+      <tr><td>Галочка ставится</td><td>Чек-лист интерактивен для читателя — запишем как подтверждённое</td></tr>
+      <tr><td>Квадратик не нажимается</td><td>Это только стиль списка; интерактив — лишь отдельным сообщением</td></tr>
+      <tr><td>Ставится, но видна только вам</td><td>Состояние личное у каждого читателя, не общее</td></tr>
+      <tr><td>Ставится и видна обоим</td><td>Состояние общее — важно для совместных списков</td></tr>
+    </table>
+    <p style="margin:14px 0 0;font-size:14px">
+      Если в личном чате не нажимается — попробуйте в группе: у нативных чек-листов Telegram
+      есть настройка «другие могут отмечать», и поведение может зависеть от типа чата.
+    </p>
+  </div>
+
+</div>
+
+<!-- Текст для буфера: короткая обёртка вокруг будущего чек-листа -->
+<div id="tg-source" aria-hidden="true" style="position:absolute;left:-99999px;top:0;width:680px">
+
+<h1>Проверка чек-листа</h1>
+
+<p>Небольшой тест: выясняем, может ли читатель отмечать пункты в чек-листе внутри статьи.</p>
+
+<h2>Отметьте, что успели сегодня</h2>
+
+<p>— сюда чек-лист —</p>
+
+<p>Если получилось поставить галочку — напишите, видно ли её у отправителя.</p>
+
+</div>
+
+<script>
+(function () {
+  var src = document.getElementById('tg-source');
+  document.getElementById('preview').innerHTML = src.innerHTML;
+
+  function tidy(s) { return s.replace(/\s+/g, ' ').trim(); }
+
+  function plain() {
+    var out = [];
+    Array.prototype.forEach.call(src.children, function (node) {
+      var tag = node.tagName.toLowerCase();
+      if (tag === 'ul' || tag === 'ol') {
+        var n = 1;
+        Array.prototype.forEach.call(node.children, function (li) {
+          out.push((tag === 'ol' ? n++ + '. ' : '• ') + tidy(li.textContent));
+        });
+        out.push('');
+      } else {
+        out.push(tidy(node.textContent));
+        out.push('');
+      }
+    });
+    return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function flash(btn, ok, msg) {
+    var keep = btn.innerHTML;
+    btn.innerHTML = ok ? '✅ Скопировано' : (msg || '⚠️ Не вышло');
+    btn.classList.toggle('done', ok);
+    setTimeout(function () { btn.innerHTML = keep; btn.classList.remove('done'); }, 2200);
+  }
+
+  function selectCopy() {
+    var probe = src.cloneNode(true);
+    probe.removeAttribute('id');
+    probe.removeAttribute('aria-hidden');
+    probe.style.cssText = 'position:fixed;left:0;top:0;width:680px;opacity:0;pointer-events:none;background:#fff;color:#000';
+    document.body.appendChild(probe);
+    var range = document.createRange();
+    range.selectNodeContents(probe);
+    var sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    sel.removeAllRanges();
+    document.body.removeChild(probe);
+    return ok;
+  }
+
+  function copyRich(btn) {
+    var html = src.innerHTML, text = plain();
+    if (navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
+      var item = new ClipboardItem({
+        'text/html':  new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([text], { type: 'text/plain' })
+      });
+      navigator.clipboard.write([item]).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, selectCopy()); }
+      );
+    } else {
+      flash(btn, selectCopy());
+    }
+  }
+
+  function copyPlain(btn) {
+    var text = plain();
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(
+        function () { flash(btn, true); },
+        function () { flash(btn, false, '⚠️ Выделите вручную'); }
+      );
+    } else {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(area);
+      flash(btn, ok, '⚠️ Выделите вручную');
+    }
+  }
+
+  document.querySelectorAll('.copybtn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.dataset.copy === 'rich') copyRich(btn); else copyPlain(btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>
