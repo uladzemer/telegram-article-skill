@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Slides</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #0d0d14;
+    --ink-2: #16161f;
+    --line: #2b2b3a;
+    --text: #f4f4f7;
+    --muted: #9b9bb0;
+    --tg: #2f81f7;
+    --tg-2: #1d5fd0;
+    --ok: #4ade80;
+    --warn: #ffc857;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body { background: #000; font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--text);
+    padding: 76px 80px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 40px;
+  }
+
+  /* мягкое свечение сверху */
+  .slide::before {
+    content: "";
+    position: absolute;
+    inset: -30% 10% auto 10%;
+    height: 620px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(47,129,247,.22), transparent 68%);
+    pointer-events: none;
+  }
+
+  .slide > * { position: relative; }
+
+  .step {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--tg);
+    margin-bottom: 26px;
+  }
+
+  h1 {
+    font-size: 78px;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: 58px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    margin-bottom: 40px;
+  }
+
+  .lead {
+    font-size: 31px;
+    line-height: 1.45;
+    color: var(--muted);
+    margin-top: 32px;
+    max-width: 850px;
+  }
+
+  .lead b { color: var(--text); font-weight: 600; }
+
+  .spacer { flex: 1; }
+
+  .foot {
+    margin-top: auto;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 23px;
+    color: var(--muted);
+  }
+
+  .foot b { color: var(--text); font-weight: 600; }
+  .dot { color: var(--line); margin: 0 14px; }
+
+  /* ── слайд 1 ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: rgba(47,129,247,.14);
+    border: 1px solid rgba(47,129,247,.4);
+    color: #9ec5ff;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    align-self: flex-start;
+  }
+
+  .hero-note {
+    margin-top: 46px;
+    padding: 26px 30px;
+    border-radius: 18px;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--tg);
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 880px;
+  }
+  .hero-note b { color: var(--text); }
+
+  /* ── слайд 2: до/после ── */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+
+  .box {
+    border-radius: 20px;
+    padding: 32px 30px;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    min-height: 430px;
+  }
+  .box.bad { border-color: rgba(255,107,114,.34); }
+  .box.good { border-color: rgba(74,222,128,.34); }
+
+  .box-label {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .bad .box-label { color: #ff8b91; }
+  .good .box-label { color: var(--ok); }
+
+  .code-line {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 23px;
+    line-height: 1.75;
+    color: #c7c7d8;
+    word-break: break-all;
+  }
+  .code-line .tag { color: #ff8b91; }
+
+  .mini-h { font-size: 30px; font-weight: 700; margin-bottom: 14px; }
+  .mini-p { font-size: 22px; line-height: 1.5; color: var(--muted); margin-bottom: 18px; }
+  .mini-table { width: 100%; border-collapse: collapse; font-size: 20px; }
+  .mini-table td, .mini-table th {
+    border: 1px solid #3a3a4d; padding: 9px 12px; text-align: left;
+  }
+  .mini-table th { background: rgba(255,255,255,.05); font-weight: 600; }
+  .mini-table td { color: var(--muted); }
+
+  .verdict {
+    margin-top: 34px;
+    font-size: 27px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .verdict b { color: var(--text); }
+
+  /* ── слайд 3: возможности ── */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .cap {
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 30px;
+  }
+  .cap-t { font-size: 29px; font-weight: 700; margin-bottom: 10px; }
+  .cap-d { font-size: 21px; line-height: 1.45; color: var(--muted); }
+
+  .no-list { margin-top: 30px; font-size: 24px; line-height: 1.7; color: var(--muted); }
+  .no-list b { color: var(--warn); font-weight: 600; }
+
+  /* ── слайд 4: результат ── */
+  .facts { display: flex; flex-direction: column; gap: 18px; margin-bottom: 6px; }
+
+  .fact {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px 30px;
+  }
+  .fact-mark {
+    flex: 0 0 auto;
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 800;
+    background: rgba(74,222,128,.15);
+    color: var(--ok);
+    border: 1px solid rgba(74,222,128,.35);
+  }
+  .fact-mark.warn {
+    background: rgba(255,200,87,.14);
+    color: var(--warn);
+    border-color: rgba(255,200,87,.35);
+  }
+  .fact-t { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .fact-d { font-size: 21px; line-height: 1.45; color: var(--muted); }
+
+  .link-row {
+    margin-top: 26px;
+    padding: 24px 32px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(47,129,247,.16), rgba(47,129,247,.05));
+    border: 1px solid rgba(47,129,247,.34);
+    font-size: 27px;
+    line-height: 1.6;
+  }
+  .link-row .u { color: #9ec5ff; font-weight: 600; }
+  .link-row .small { display:block; font-size: 21px; color: var(--muted); margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ 1 ═══════════ -->
+<div class="slide" id="s1">
+  <span class="badge">📎 → «Статья» · Telegram 12.9+</span>
+  <h1>Статьи для Telegram<br>пишет агент</h1>
+  <p class="lead">
+    Навык для Claude Code и Codex: агент собирает статью с заголовками, таблицами,
+    списками и картинками — вы вставляете её одним нажатием.
+  </p>
+  <div class="hero-note">
+    <b>Этот пост свёрстан им же.</b> Всё, что вы видите, приехало из браузера
+    в редактор статьи через буфер обмена.
+  </div>
+  <div class="foot">
+    <span><b>github.com/uladzemer/telegram-article-skill</b></span>
+    <span>MIT<span class="dot">·</span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════ 2 ═══════════ -->
+<div class="slide" id="s2">
+  <div class="step">Проблема</div>
+  <h2>Редактор не понимает<br>HTML-код</h2>
+  <div class="split">
+    <div class="box bad">
+      <div class="box-label">✕ Вставили код</div>
+      <div class="code-line">
+        <span class="tag">&lt;h1&gt;</span>Заголовок<span class="tag">&lt;/h1&gt;</span><br>
+        <span class="tag">&lt;p&gt;</span>Текст абзаца<span class="tag">&lt;/p&gt;</span><br>
+        <span class="tag">&lt;table&gt;</span><br>
+        <span class="tag">&lt;tr&gt;&lt;td&gt;</span>Ячейка…
+      </div>
+      <div class="mini-p" style="margin-top:24px">
+        Теги остаются текстом на экране
+      </div>
+    </div>
+    <div class="box good">
+      <div class="box-label">✓ Скопировали страницу</div>
+      <div class="mini-h">Заголовок</div>
+      <div class="mini-p">Текст абзаца</div>
+      <table class="mini-table">
+        <tr><th>Элемент</th><th>Есть</th></tr>
+        <tr><td>Таблицы</td><td>да</td></tr>
+        <tr><td>Списки</td><td>да</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="verdict">
+    Копировать нужно <b>отрендеренную</b> страницу, а не её исходник:
+    буфер обмена несёт структуру, и редактор её принимает.
+  </div>
+  <div class="foot">
+    <span><b>Решение навыка</b><span class="dot">·</span>страница с кнопкой «скопировать»</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════ 3 ═══════════ -->
+<div class="slide" id="s3">
+  <div class="step">Что доступно</div>
+  <h2>Оформление — структурное</h2>
+  <div class="grid">
+    <div class="cap"><div class="cap-t">Заголовки</div><div class="cap-d">Шесть уровней — и единственная «крупность» в редакторе</div></div>
+    <div class="cap"><div class="cap-t">Таблицы</div><div class="cap-d">С шапкой, границами и заливкой строк</div></div>
+    <div class="cap"><div class="cap-t">Картинки и карусели</div><div class="cap-d">Свайп-галерея, подпись у каждой своя</div></div>
+    <div class="cap"><div class="cap-t">Списки</div><div class="cap-d">Обычные, нумерованные и чек-листы</div></div>
+    <div class="cap"><div class="cap-t">Цитаты и код</div><div class="cap-d">Выноски, сворачиваемые блоки, подсветка синтаксиса</div></div>
+    <div class="cap"><div class="cap-t">Формулы</div><div class="cap-d">LaTeX — строкой или отдельным блоком</div></div>
+  </div>
+  <div class="no-list">
+    <b>Чего нет:</b> выбора шрифта, размера кегля и цвета текста.
+    Крупность задаёт уровень заголовка — и только он.
+  </div>
+  <div class="foot">
+    <span><b>32 768 знаков</b><span class="dot">·</span>в восемь раз больше обычного сообщения</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════ 4 ═══════════ -->
+<div class="slide" id="s4">
+  <div class="step">Проверено на практике</div>
+  <h2>Две вещи, которых<br>нет в гайдах</h2>
+  <div class="facts">
+    <div class="fact">
+      <div class="fact-mark">✓</div>
+      <div>
+        <div class="fact-t">Таблицы переносятся вставкой</div>
+        <div class="fact-d">Гайды утверждают обратное. Приезжают с шапкой, границами, заливкой строк и эмодзи в ячейке</div>
+      </div>
+    </div>
+    <div class="fact">
+      <div class="fact-mark warn">!</div>
+      <div>
+        <div class="fact-t">Чек-лист — авторский</div>
+        <div class="fact-d">Галочки ставит только автор. Читатель нажать не может — для этого есть отдельная функция Telegram</div>
+      </div>
+    </div>
+    <div class="fact">
+      <div class="fact-mark warn">!</div>
+      <div>
+        <div class="fact-t">Premium нужен только автору</div>
+        <div class="fact-d">Чтобы публиковать. Читателям достаточно Telegram 12.8 и новее</div>
+      </div>
+    </div>
+  </div>
+  <div class="link-row">
+    <span class="u">github.com/uladzemer/telegram-article-skill</span>
+    <span class="small">Навык, справочник по редактору и готовый шаблон. Лицензия MIT — забирайте.</span>
+  </div>
+  <div class="foot">
+    <span><b>Claude Code</b><span class="dot">·</span><b>Codex</b><span class="dot">·</span>любой агент с SKILL.md</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>
